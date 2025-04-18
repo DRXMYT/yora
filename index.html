@@ -1,188 +1,438 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>YORA – Your Year Abroad | Dein Begleiter im Auslandsjahr</title>
-  <!-- Stylesheet Dependencies -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <style>
-    :root { --primary: #7209b7; --secondary: #560bad; --accent: #4cc9f0; --light: #f8f9fa; --yellow: #fee440; --green: #70e000; --pink: #f72585; --dark: #212529; --purple-light: #d8bbff; --background: #f9f7ff; }
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Nunito', sans-serif; }
-    html { scroll-behavior: smooth; }
-    body { color: var(--dark); background: var(--background); overflow-x: hidden; }
-    header { position: sticky; top: 0; background: white; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
-    .nav-wrapper { display: flex; justify-content: space-between; align-items: center; height: 4rem; }
-    .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); display: flex; align-items: center; gap: 0.5rem; }
-    .nav-links { display: flex; gap: 1.5rem; }
-    .nav-links a { color: var(--dark); text-decoration: none; font-weight: 600; position: relative; }
-    .nav-links a::after { content: ''; position: absolute; width: 0; height: 2px; background: var(--primary); bottom: -4px; left: 0; transition: width 0.3s; }
-    .nav-links a:hover::after { width: 100%; }
-    .hamburger { display: none; flex-direction: column; gap: 4px; cursor: pointer; }
-    .hamburger div { width: 25px; height: 3px; background: var(--dark); transition: 0.3s; }
-    .language-switcher { display: flex; gap: 0.5rem; }
-    .language-btn { background: none; border: none; cursor: pointer; font-weight: 600; color: var(--dark); padding: 0.25rem 0.5rem; border-radius: 4px; transition: background 0.3s; }
-    .language-btn.active { background: var(--purple-light); color: var(--primary); }
-    @media (max-width: 768px) {
-      .nav-links { position: fixed; top: 4rem; right: -100%; flex-direction: column; background: white; width: 200px; padding: 1rem; gap: 1rem; transition: right 0.3s; box-shadow: -2px 0 10px rgba(0,0,0,0.1); }
-      .nav-links.active { right: 0; }
-      .hamburger { display: flex; }
-    }
-    .hero { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; text-align: center; padding: 5rem 1rem 7rem; position: relative; overflow: hidden; }
-    .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
-    .hero p { font-size: 1.2rem; max-width: 700px; margin: 0 auto 2rem; }
-    .btn { padding: 0.75rem 1.5rem; border: none; border-radius: 25px; font-weight: 700; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; }
-    .btn-yellow { background: var(--yellow); color: var(--dark); }
-    .btn-yellow:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(254, 228, 64, 0.5); }
-    .hero-buddy-container { position: relative; width: 180px; height: 180px; margin: 0 auto 1.5rem; }
-    .hero-buddy { width: 100%; height: 100%; border-radius: 50%; cursor: pointer; }
-    .buddy-speech-bubble { position: absolute; top: -60px; right: -60px; background: white; color: var(--dark); padding: 0.5rem; border-radius: 10px; font-size: 0.9rem; opacity: 0; transform: scale(0.8); transition: all 0.3s; }
-    .hero-buddy-container:hover .buddy-speech-bubble { opacity: 1; transform: scale(1); }
-    .particles-container { position: absolute; inset: 0; z-index: 1; }
-    section.features { padding: 4rem 1rem; }
-    .features h2 { text-align: center; margin-bottom: 2rem; font-size: 2rem; color: var(--primary); }
-    .features-list { display: grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap: 1.5rem; }
-    .feature-item { background: white; border-radius: 10px; padding: 1.5rem; box-shadow: 0 8px 20px rgba(0,0,0,0.05); transition: transform 0.3s, box-shadow 0.3s; }
-    .feature-item:hover { transform: translateY(-8px); box-shadow: 0 12px 30px rgba(114,9,183,0.1); }
-    .feature-icon { font-size: 2rem; margin-bottom: 1rem; }
-    section.testimonials { background: var(--light); padding: 4rem 1rem; }
-    .testimonial-slider { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 1rem; padding-bottom: 1rem; }
-    .testimonial { flex: 0 0 80%; background: white; border-radius: 10px; padding: 2rem; box-shadow: 0 8px 20px rgba(0,0,0,0.05); scroll-snap-align: start; }
-    .testimonial p { font-style: italic; margin-bottom: 1rem; }
-    .testimonial .author { text-align: right; font-weight: 700; }
-    section.waitlist { background: linear-gradient(135deg, var(--pink), var(--primary)); color: white; text-align: center; padding: 4rem 1rem; }
-    .waitlist-form { max-width: 400px; margin: 2rem auto; position: relative; }
-    .input-group { display: flex; border-radius: 25px; overflow: hidden; }
-    .email-input { flex: 1; padding: 0.75rem 1rem; border: none; font-size: 1rem; }
-    .submit-btn { background: var(--yellow); color: var(--dark); padding: 0 1rem; }
-    #backToTop { position: fixed; bottom: 2rem; right: 2rem; background: var(--primary); color: white; border: none; padding: 0.75rem; border-radius: 50%; font-size: 1.25rem; cursor: pointer; display: none; z-index: 500; }
-    footer { background: var(--dark); color: white; text-align: center; padding: 3rem 1rem; }
-    .footer-links, .social-links { display: flex; justify-content: center; gap: 1.5rem; margin: 1rem 0; }
-    .footer-links a { color: white; text-decoration: none; transition: color 0.3s; }
-    .footer-links a:hover { color: var(--accent); }
-    .social-link { width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: background 0.3s, transform 0.3s; }
-    .social-link:hover { background: var(--primary); transform: translateY(-3px); }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YORA - Your Year Abroad</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #7A5FFF;
+            --secondary-light: #E8E6FA;
+            --secondary-mint: #B9F3E4;
+            --secondary-dark: #1A1B2F;
+            --secondary-white: #FAFAFA;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: var(--secondary-white);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(122, 95, 255, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(122, 95, 255, 0.4);
+        }
+        
+        /* Navigation */
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .lang-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: var(--secondary-dark);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+            background: linear-gradient(135deg, var(--secondary-light) 0%, white 100%);
+            border-radius: 0 0 50px 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background-color: rgba(185, 243, 228, 0.4);
+            top: -150px;
+            right: -100px;
+            z-index: 0;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-dark);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #555;
+        }
+        
+        .hero-img {
+            margin-top: 40px;
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--secondary-dark);
+            font-size: 2rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .feature-title {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        /* Why YORA Section */
+        .why-yora {
+            padding: 80px 0;
+            background-color: var(--secondary-light);
+            text-align: center;
+        }
+        
+        .why-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .why-text {
+            font-size: 1.3rem;
+            line-height: 1.7;
+            margin-bottom: 40px;
+            color: var(--secondary-dark);
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 80px 0;
+            text-align: center;
+            background: linear-gradient(135deg, #7A5FFF 0%, #6A4FEF 100%);
+            color: white;
+        }
+        
+        .cta h2 {
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+        
+        .cta .btn {
+            background-color: white;
+            color: var(--primary);
+        }
+        
+        /* Footer */
+        .footer {
+            padding: 50px 0;
+            background-color: var(--secondary-dark);
+            color: white;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-info {
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .social-icon:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .copyright {
+            width: 100%;
+            text-align: center;
+            margin-top: 40px;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 60px 0;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-links {
+                margin: 20px 0;
+                justify-content: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <div class="container nav-wrapper">
-      <div class="logo">YORA</div>
-      <nav class="nav-links">
-        <a href="#features" class="lang-de">Features</a><a href="#features" class="lang-en">Features</a>
-        <a href="#testimonials" class="lang-de">Erfahrungen</a><a href="#testimonials" class="lang-en">Testimonials</a>
-        <a href="#waitlist" class="lang-de">Warteliste</a><a href="#waitlist" class="lang-en">Waitlist</a>
-        <a href="#footer" class="lang-de">Kontakt</a><a href="#footer" class="lang-en">Contact</a>
-      </nav>
-      <div class="language-switcher">
-        <button class="language-btn active" data-lang="de">DE</button>
-        <button class="language-btn" data-lang="en">EN</button>
-      </div>
-      <div class="hamburger"><div></div><div></div><div></div></div>
-    </div>
-  </header>
-
-  <section class="hero" id="hero">
+    <!-- Navigation -->
     <div class="container">
-      <div class="hero-buddy-container" data-aos="zoom-in">
-        <img src="https://i.ibb.co/vvVvP9F3/Chat-GPT-Image-Apr-17-2025-09-23-53-AM.png" alt="YORA Buddy" class="hero-buddy">
-        <div class="buddy-speech-bubble lang-de">Hallo! Ich bin dein YORA Buddy …</div>
-        <div class="buddy-speech-bubble lang-en">Hello! I'm your YORA Buddy …</div>
-      </div>
-      <h1 data-aos="fade-up"><span class="lang-de">YORA<br>Dein Auslandsjahr.<br>Deine Erfahrung.</span><span class="lang-en">YORA<br>Your Year Abroad.<br>Your Experience.</span></h1>
-      <p data-aos="fade-up" data-aos-delay="200"><span class="lang-de">Die App, die dich emotional, sozial und organisatorisch durch dein Auslandsjahr begleitet.</span><span class="lang-en">The app that guides you emotionally, socially, and organizationally through your year abroad.</span></p>
-      <button class="btn btn-yellow" data-aos="fade-up" data-aos-delay="400"><span class="lang-de">Warteliste ➔</span><span class="lang-en">Join Waitlist ➔</span></button>
+        <nav class="nav">
+            <a href="#" class="logo">YORA</a>
+            <div class="lang-toggle">
+                <span>EN</span> | <a href="#" style="color: #777; text-decoration: none;">DE</a>
+            </div>
+        </nav>
     </div>
-    <div class="particles-container"></div>
-  </section>
-
-  <section class="features" id="features">
-    <div class="container">
-      <h2 data-aos="fade-right"><span class="lang-de">Das kann YORA für dich tun!</span><span class="lang-en">What YORA can do for you!</span></h2>
-      <div class="features-list">
-        <div class="feature-item" data-aos="flip-left"><div class="feature-icon">🌍</div><h3><span class="lang-de">Kulturguide</span><span class="lang-en">Culture Guide</span></h3><p><span class="lang-de">Entdecke lokale Bräuche und Insider-Tipps.</span><span class="lang-en">Discover local customs and insider tips.</span></p></div>
-        <div class="feature-item" data-aos="flip-left" data-aos-delay="100"><div class="feature-icon">🗣️</div><h3><span class="lang-de">Sprachhelfer</span><span class="lang-en">Language Helper</span></h3><p><span class="lang-de">Übe Phrasen spielerisch und sicher.</span><span class="lang-en">Practice phrases playfully and confidently.</span></p></div>
-        <div class="feature-item" data-aos="flip-left" data-aos-delay="200"><div class="feature-icon">📝</div><h3><span class="lang-de">Tagebuch</span><span class="lang-en">Journal</span></h3><p><span class="lang-de">Halte Erinnerungen mit Fotos und Text fest.</span><span class="lang-en">Capture memories with photos and text.</span></p></div>
-        <div class="feature-item" data-aos="flip-left" data-aos-delay="300"><div class="feature-icon">👋</div><h3><span class="lang-de">Community</span><span class="lang-en">Community</span></h3><p><span class="lang-de">Vernetze dich mit Gleichgesinnten weltweit.</span><span class="lang-en">Connect with like-minded peers globally.</span></p></div>
-        <div class="feature-item" data-aos="flip-left" data-aos-delay="400"><div class="feature-icon">🧠</div><h3><span class="lang-de">Wohlbefinden</span><span class="lang-en">Well-being</span></h3><p><span class="lang-de">Tipps gegen Heimweh & Anpassungsstress.</span><span class="lang-en">Tips for homesickness & adjustment stress.</span></p></div>
-        <div class="feature-item" data-aos="flip-left" data-aos-delay="500"><div class="feature-icon">📅</div><h3><span class="lang-de">Organisation</span><span class="lang-en">Organization</span></h3><p><span class="lang-de">Termine, Dokumente & To-Dos immer im Blick.</span><span class="lang-en">Keep dates, docs & to-dos in focus.</span></p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="testimonials" id="testimonials">
-    <div class="container">
-      <h2 data-aos="fade-up"><span class="lang-de">Erfahrungen</span><span class="lang-en">Testimonials</span></h2>
-      <div class="testimonial-slider">
-        <div class="testimonial" data-aos="fade-up"><p>„YORA hat mir geholfen, mich schnell einzuleben und Freunde zu finden!“</p><div class="author">– Anna, DE</div></div>
-        <div class="testimonial" data-aos="fade-up" data-aos-delay="100"><p>„Die Sprachtipps sind super praktisch im Alltag.“</p><div class="author">– Marco, IT</div></div>
-        <div class="testimonial" data-aos="fade-up" data-aos-delay="200"><p>„Besonders der Culture Guide war ein Gamechanger.“</p><div class="author">– Sophie, US</div></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="waitlist" id="waitlist">
-    <div class="container">
-      <h2 data-aos="fade-right"><span class="lang-de">Sei von Anfang an dabei!</span><span class="lang-en">Be a part from the start!</span></h2>
-      <p data-aos="fade-right" data-aos-delay="100"><span class="lang-de">Melde dich an und werde Teil unserer Community.</span><span class="lang-en">Sign up and join our community.</span></p>
-      <div class="waitlist-form" data-aos="fade-up" data-aos-delay="200">
-        <div class="input-group">
-          <input type="email" class="email-input" placeholder="Deine E-Mail-Adresse" data-pl-de="Deine E-Mail-Adresse" data-pl-en="Your email address">
-          <button class="submit-btn"><span class="lang-de">Vormerken</span><span class="lang-en">Join</span></button>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>YORA – Your Year Abroad.</h1>
+                <p>The first app that supports exchange students emotionally, socially, and organizationally.</p>
+                <a href="https://tally.so/r/mOVMYg" class="btn">Join the Beta</a>
+                
+                <div class="hero-img-container">
+                    <img src="/api/placeholder/700/400" alt="YORA App Preview" class="hero-img">
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <button id="backToTop" title="Nach oben">↑</button>
-
-  <footer id="footer">
-    <div class="container">
-      <div class="logo">YORA</div>
-      <p><span class="lang-de">Dein digitaler Begleiter für das Abenteuer Auslandsjahr</span><span class="lang-en">Your digital companion for the year abroad adventure</span></p>
-      <div class="footer-links">
-        <a href="#">Impressum</a><a href="#">Privacy Policy</a><a href="#">Kontakt</a><a href="#">Contact</a>
-      </div>
-      <div class="social-links">
-        <a href="#" class="social-link" aria-label="Facebook">F</a>
-        <a href="#" class="social-link" aria-label="Twitter">T</a>
-        <a href="#" class="social-link" aria-label="Instagram">I</a>
-      </div>
-      <p style="font-size:0.8rem; opacity:0.8;">© 2025 YORA. Alle Rechte vorbehalten.</p>
-    </div>
-  </footer>
-
-  <!-- Scripts -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      AOS.init({ duration: 800, once: true });
-      const ham = document.querySelector('.hamburger');
-      const nav = document.querySelector('.nav-links');
-      ham.addEventListener('click', () => nav.classList.toggle('active'));
-      const btn = document.getElementById('backToTop');
-      window.addEventListener('scroll', () => btn.style.display = window.scrollY > 300 ? 'block' : 'none');
-      btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-      const container = document.querySelector('.particles-container');
-      for(let i=0;i<30;i++){ const p=document.createElement('div'); p.classList.add('particle'); const size=Math.random()*8+4; p.style.cssText=`width:${size}px;height:${size}px;left:${Math.random()*100}%`; gsap.to(p,{y:-100-Math.random()*100,x:(Math.random()-0.5)*100,duration:Math.random()*10+5,repeat:-1,yoyo:true,ease:'sine.inOut'}); container.append(p); }
-      // Language Switcher
-      const langBtns = document.querySelectorAll('.language-btn');
-      const allDe = document.querySelectorAll('.lang-de');
-      const allEn = document.querySelectorAll('.lang-en');
-      const emailInput = document.querySelector('.email-input');
-      function switchLang(lang){
-        allDe.forEach(el => el.style.display = lang==='de' ? 'inline' : 'none');
-        allEn.forEach(el => el.style.display = lang==='en' ? 'inline' : 'none');
-        emailInput.placeholder = emailInput.getAttribute(lang==='de' ? 'data-pl-de' : 'data-pl-en');
-        langBtns.forEach(b => b.classList.toggle('active', b.getAttribute('data-lang')===lang));
-      }
-      langBtns.forEach(b => b.addEventListener('click', () => switchLang(b.getAttribute('data-lang'))));
-      // init language
-      switchLang('de');
-    });
-  </script>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">What YORA Offers</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-emoji">✈️</div>
+                    <h3 class="feature-title">Flight Buddy Finder</h3>
+                    <p>Find others who are flying on the same day as you.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-emoji">📆</div>
+                    <h3 class="feature-title">Countdown</h3>
+                    <p>Visualize your year abroad with our interactive timeline.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-emoji">🧠</div>
+                    <h3 class="feature-title">Mood Tracker</h3>
+                    <p>Track how you feel throughout your exchange experience.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-emoji">🗺️</div>
+                    <h3 class="feature-title">Community Map</h3>
+                    <p>See where other exchange students are located around the world.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-emoji">💬</div>
+                    <h3 class="feature-title">Shadow Box</h3>
+                    <p>Share your thoughts anonymously with the community.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-emoji">🤖</div>
+                    <h3 class="feature-title">YORA Buddy</h3>
+                    <p>An empathetic AI companion for your exchange journey.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-emoji">🧑‍🏫</div>
+                    <h3 class="feature-title">Mentors</h3>
+                    <p>Former exchange students ready to support you.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Why YORA Section -->
+    <section class="why-yora">
+        <div class="container">
+            <h2 class="section-title">Why YORA?</h2>
+            
+            <div class="why-content">
+                <p class="why-text">
+                    Exchange programs aren't just exciting. They also involve homesickness, language barriers, and isolation. YORA is there for you when you have no one – or when you need someone who understands.
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to transform your exchange experience?</h2>
+            <a href="https://tally.so/r/mOVMYg" class="btn">Join the Beta Now</a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <p>Email: info@joinyora.com</p>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Imprint</a>
+                </div>
+                
+                <div class="social-links">
+                    <a href="#" class="social-icon">TikTok</a>
+                    <a href="#" class="social-icon">Instagram</a>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                © 2025 YORA
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
