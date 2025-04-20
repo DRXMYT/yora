@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>YORA – Your Year Abroad</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --purple: #6a32f0;
@@ -29,53 +29,45 @@
 
     header {
       width: 100%;
-      padding: 20px 30px;
+      padding: 24px 40px;
       display: flex;
       align-items: center;
-      justify-content: flex-start;
+      background-color: var(--purple);
       position: sticky;
       top: 0;
       z-index: 1000;
-      background-color: var(--purple);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+      animation: slideDown 1.2s ease-out forwards;
     }
 
     .logo {
-      height: 40px;
-      width: auto;
-      transition: transform 0.3s ease;
-    }
-
-    .logo:hover {
-      transform: scale(1.08) rotate(-1deg);
+      height: 48px;
+      animation: fadeIn 2s ease-out;
     }
 
     .container {
       max-width: 1240px;
       margin: 0 auto;
-      padding: 40px 20px;
+      padding: 80px 20px;
     }
 
     .hero {
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 100px;
-      animation: slideUp 1.5s ease forwards;
+      flex-wrap: wrap;
+      margin-bottom: 120px;
+      animation: fadeUp 1.5s ease-out forwards;
     }
 
     .hero-text {
-      width: 100%;
-      max-width: 600px;
-      animation: fadeInLeft 1.5s ease forwards;
+      max-width: 560px;
     }
 
     .hero-text h1 {
-      font-size: 46px;
+      font-size: 52px;
       font-weight: 700;
-      line-height: 1.2;
       margin-bottom: 24px;
+      animation: fadeInLeft 1.2s ease-out;
     }
 
     .hero-text h1 span {
@@ -85,6 +77,7 @@
     .hero-text p {
       font-size: 18px;
       line-height: 1.6;
+      animation: fadeInLeft 1.4s ease-out;
     }
 
     .hero-text p span {
@@ -92,136 +85,137 @@
       font-weight: 600;
     }
 
-    .phone-mockup {
-      width: 300px;
-      height: auto;
+    .hero img {
+      width: 340px;
       margin-top: 40px;
       animation: float 3s ease-in-out infinite;
-      transition: transform 0.4s ease;
+      transition: transform 0.3s ease;
+    }
+
+    .hero img:hover {
+      transform: scale(1.05);
     }
 
     .features {
       display: flex;
+      gap: 32px;
+      justify-content: space-between;
+      margin-bottom: 140px;
       flex-wrap: wrap;
-      justify-content: center;
-      margin-bottom: 100px;
-      gap: 20px;
+      animation: fadeUp 1.5s ease-out forwards;
     }
 
     .card {
-      background-color: var(--white);
+      flex: 1;
+      min-width: 280px;
+      background: white;
       color: var(--dark);
       border-radius: 24px;
-      padding: 32px 24px;
-      width: 90%;
-      max-width: 340px;
+      padding: 32px;
       text-align: center;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: zoomIn 1.2s ease-out;
     }
 
     .card:hover {
-      transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 16px 32px rgba(0,0,0,0.2);
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.12);
     }
 
     .card img {
-      width: 100%;
-      height: auto;
-      max-height: 140px;
-      margin-bottom: 20px;
+      height: 140px;
       object-fit: contain;
+      margin-bottom: 20px;
+      animation: bounceIn 1.5s ease-out;
     }
 
     .card h3 {
+      color: var(--purple);
       font-size: 20px;
       font-weight: 600;
-      color: var(--purple);
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
     .card p {
       font-size: 15px;
       line-height: 1.4;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
 
     .card button {
       background-color: var(--purple);
-      color: var(--white);
-      border: none;
-      border-radius: 12px;
+      color: white;
       padding: 10px 20px;
-      font-size: 14px;
+      border-radius: 12px;
+      border: none;
       font-weight: 600;
       cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.3s ease;
+      transition: all 0.3s ease;
     }
 
     .card button:hover {
+      transform: scale(1.06);
       background-color: #5c27d4;
-      transform: scale(1.05);
     }
 
     .beta-section {
+      background-color: var(--purple);
       display: flex;
-      flex-wrap: wrap;
       justify-content: center;
       align-items: center;
-      gap: 40px;
-      padding: 80px 20px;
-      background-color: var(--purple);
-      animation: fadeInUp 2s ease forwards;
+      flex-wrap: wrap;
+      gap: 60px;
+      padding: 120px 20px;
+      animation: fadeUp 1.8s ease-out forwards;
     }
 
     .beta-section img {
-      width: 340px;
-      height: auto;
+      width: 440px;
+      max-width: 100%;
       animation: float 4s ease-in-out infinite;
     }
 
     .beta-text {
-      max-width: 600px;
-      text-align: center;
+      max-width: 520px;
+      animation: fadeIn 2s ease-out;
     }
 
     .beta-text h2 {
-      font-size: 48px;
-      font-weight: 800;
-      margin-bottom: 20px;
+      font-size: 56px;
+      font-weight: 900;
+      margin-bottom: 24px;
     }
 
     .beta-text p {
-      font-size: 20px;
+      font-size: 22px;
       line-height: 1.6;
-      margin-bottom: 30px;
+      margin-bottom: 32px;
     }
 
     .beta-text a {
       background-color: var(--yellow);
       color: var(--dark);
       text-decoration: none;
-      padding: 18px 36px;
+      padding: 20px 40px;
       border-radius: 16px;
       font-weight: 700;
       font-size: 18px;
-      display: inline-block;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
     }
 
     .beta-text a:hover {
-      transform: scale(1.08);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+      transform: scale(1.07);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.25);
     }
 
     footer {
       text-align: center;
-      padding: 50px 20px;
+      padding: 40px;
       font-size: 14px;
       color: var(--white);
-      animation: fadeIn 2.5s ease forwards;
+      animation: fadeIn 2.5s ease-out;
     }
 
     @keyframes fadeIn {
@@ -229,7 +223,7 @@
       100% { opacity: 1; }
     }
 
-    @keyframes fadeInUp {
+    @keyframes fadeUp {
       0% { opacity: 0; transform: translateY(40px); }
       100% { opacity: 1; transform: translateY(0); }
     }
@@ -239,8 +233,8 @@
       100% { opacity: 1; transform: translateX(0); }
     }
 
-    @keyframes slideUp {
-      0% { transform: translateY(60px); opacity: 0; }
+    @keyframes slideDown {
+      0% { transform: translateY(-100%); opacity: 0; }
       100% { transform: translateY(0); opacity: 1; }
     }
 
@@ -249,33 +243,28 @@
       50% { transform: translateY(-10px); }
     }
 
+    @keyframes zoomIn {
+      0% { transform: scale(0.95); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes bounceIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      60% { transform: scale(1.05); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+
     @media (max-width: 768px) {
-      .hero {
+      .hero, .beta-section {
         flex-direction: column;
-        align-items: center;
         text-align: center;
       }
-
-      .phone-mockup {
-        margin-top: 30px;
+      .hero img, .beta-section img {
         width: 80%;
       }
-
       .features {
         flex-direction: column;
         align-items: center;
-      }
-
-      .card {
-        width: 90%;
-      }
-
-      .beta-section {
-        flex-direction: column;
-      }
-
-      .beta-section img {
-        width: 280px;
       }
     }
   </style>
@@ -289,9 +278,9 @@
     <section class="hero">
       <div class="hero-text">
         <h1>Living abroad is <span>beautiful</span> – and hard.</h1>
-        <p><span>YORA</span> gives you a <span>space</span> to feel seen, heard and supported.<br />Before, during, and after your <span>exchange year</span>.</p>
+        <p><span>YORA</span> gives you a <span>space</span> to feel seen, heard and supported.<br>Before, during, and after your <span>exchange year</span>.</p>
       </div>
-      <img src="https://i.ibb.co/5W2qc5VY/phone-1024-1536.png" alt="Phone UI" class="phone-mockup" />
+      <img src="https://i.ibb.co/5W2qc5VY/phone-1024-1536.png" alt="Phone UI">
     </section>
 
     <section class="features">
@@ -317,10 +306,10 @@
   </div>
 
   <section class="beta-section">
-    <img src="https://i.ibb.co/LzsDzd4Y/joinbeta-1093-1093.png" alt="Join Beta Mascot" />
+    <img src="https://i.ibb.co/LzsDzd4Y/joinbeta-1093-1093.png" alt="Join Beta Mascot">
     <div class="beta-text">
       <h2>Join the Beta Waitlist!</h2>
-      <p>We’re building an app we wish we had during our own exchange.</p>
+      <p>We're building an app we wish we had during our own exchange.</p>
       <a href="https://tally.so/r/mOVMYg" target="_blank">Sign up here</a>
     </div>
   </section>
