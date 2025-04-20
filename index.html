@@ -1,437 +1,227 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YORA - Your Year Abroad</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #7A5FFF;
-            --secondary-light: #E8E6FA;
-            --secondary-mint: #B9F3E4;
-            --secondary-dark: #1A1B2F;
-            --secondary-white: #FAFAFA;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: var(--secondary-white);
-        }
-        
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 1rem;
-        }
-        
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        .btn {
-            display: inline-block;
-            background-color: var(--primary);
-            color: white;
-            padding: 14px 32px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(122, 95, 255, 0.3);
-        }
-        
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(122, 95, 255, 0.4);
-        }
-        
-        /* Navigation */
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-        }
-        
-        .logo {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-            text-decoration: none;
-        }
-        
-        .lang-toggle {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
-            color: var(--secondary-dark);
-        }
-        
-        /* Hero Section */
-        .hero {
-            padding: 80px 0;
-            text-align: center;
-            background: linear-gradient(135deg, var(--secondary-light) 0%, white 100%);
-            border-radius: 0 0 50px 50px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            background-color: rgba(185, 243, 228, 0.4);
-            top: -150px;
-            right: -100px;
-            z-index: 0;
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--secondary-dark);
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            color: #555;
-        }
-        
-        .hero-img {
-            margin-top: 40px;
-            max-width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        /* Features Section */
-        .features {
-            padding: 80px 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-            color: var(--secondary-dark);
-            font-size: 2rem;
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-        
-        .feature-card {
-            background-color: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .feature-emoji {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-        }
-        
-        .feature-title {
-            font-size: 1.2rem;
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
-        
-        /* Why YORA Section */
-        .why-yora {
-            padding: 80px 0;
-            background-color: var(--secondary-light);
-            text-align: center;
-        }
-        
-        .why-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .why-text {
-            font-size: 1.3rem;
-            line-height: 1.7;
-            margin-bottom: 40px;
-            color: var(--secondary-dark);
-        }
-        
-        /* CTA Section */
-        .cta {
-            padding: 80px 0;
-            text-align: center;
-            background: linear-gradient(135deg, #7A5FFF 0%, #6A4FEF 100%);
-            color: white;
-        }
-        
-        .cta h2 {
-            margin-bottom: 30px;
-            font-size: 2rem;
-        }
-        
-        .cta .btn {
-            background-color: white;
-            color: var(--primary);
-        }
-        
-        /* Footer */
-        .footer {
-            padding: 50px 0;
-            background-color: var(--secondary-dark);
-            color: white;
-        }
-        
-        .footer-content {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .footer-info {
-            margin-bottom: 20px;
-        }
-        
-        .footer-links {
-            display: flex;
-            gap: 20px;
-        }
-        
-        .footer-links a {
-            color: white;
-            text-decoration: none;
-            opacity: 0.8;
-            transition: opacity 0.3s;
-        }
-        
-        .footer-links a:hover {
-            opacity: 1;
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .social-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-            text-decoration: none;
-            transition: background-color 0.3s;
-        }
-        
-        .social-icon:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-        
-        .copyright {
-            width: 100%;
-            text-align: center;
-            margin-top: 40px;
-            opacity: 0.7;
-            font-size: 0.9rem;
-        }
-        
-        /* Mobile Styles */
-        @media (max-width: 768px) {
-            .hero {
-                padding: 60px 0;
-            }
-            
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-            
-            .hero p {
-                font-size: 1rem;
-            }
-            
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .footer-links {
-                margin: 20px 0;
-                justify-content: center;
-            }
-            
-            .social-links {
-                justify-content: center;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YORA – Your Year Abroad</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --purple: #6a32f0;
+      --yellow: #ffda1f;
+      --dark: #272727;
+      --white: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: var(--purple);
+      color: var(--white);
+    }
+
+    header {
+      width: 100%;
+      padding: 30px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .logo {
+      height: 48px;
+      width: auto;
+    }
+
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 40px;
+    }
+
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 120px;
+    }
+
+    .hero-text {
+      width: 52%;
+    }
+
+    .hero-text h1 {
+      font-size: 52px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 28px;
+    }
+
+    .hero-text h1 span {
+      color: var(--yellow);
+    }
+
+    .hero-text p {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .hero-text p span {
+      color: var(--yellow);
+      font-weight: 600;
+    }
+
+    .phone-mockup {
+      width: 360px;
+      height: auto;
+    }
+
+    .features {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 160px;
+      gap: 32px;
+    }
+
+    .card {
+      background-color: var(--white);
+      color: var(--dark);
+      border-radius: 24px;
+      padding: 40px 28px;
+      width: 31%;
+      text-align: center;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    }
+
+    .card img {
+      width: 100%;
+      height: auto;
+      max-height: 150px;
+      margin-bottom: 24px;
+      object-fit: contain;
+    }
+
+    .card h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--purple);
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      font-size: 15px;
+      line-height: 1.4;
+      margin-bottom: 20px;
+    }
+
+    .card button {
+      background-color: var(--purple);
+      color: var(--white);
+      border: none;
+      border-radius: 14px;
+      padding: 12px 24px;
+      font-size: 14px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .beta-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .beta-section img {
+      width: 340px;
+      height: auto;
+    }
+
+    .beta-text {
+      max-width: 520px;
+    }
+
+    .beta-text h2 {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .beta-text p {
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .beta-text a {
+      background-color: var(--yellow);
+      color: var(--dark);
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 60px 20px;
+      font-size: 14px;
+      color: var(--white);
+    }
+  </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <div class="container">
-        <nav class="nav">
-            <a href="#" class="logo">YORA</a>
-            <div class="lang-toggle">
-                <span>EN</span> | <a href="#" style="color: #777; text-decoration: none;">DE</a>
-            </div>
-        </nav>
-    </div>
-    
-    <!-- Hero Section -->
+  <header>
+    <img src="https://i.ibb.co/dnwJdd6/logo-512-169.png" alt="YORA Logo" class="logo">
+  </header>
+
+  <div class="container">
     <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>YORA – Your Year Abroad.</h1>
-                <p>The first app that supports exchange students emotionally, socially, and organizationally.</p>
-                <a href="https://tally.so/r/mOVMYg" class="btn">Join the Beta</a>
-                
-               <div class="hero-img-container">
-    <img src="https://i.ibb.co/jS0Rkyd/Chat-GPT-Image-Apr-17-2025-11-01-08-PM-1.png" alt="YORA App Preview" class="hero-img">
-</div>
-        </div>
+      <div class="hero-text">
+        <h1>Living abroad is <span>beautiful</span> – and hard.</h1>
+        <p><span>YORA</span> gives you a <span>space</span> to feel seen, heard and supported.<br />Before, during, and after your <span>exchange year</span>.</p>
+      </div>
+      <img src="https://i.ibb.co/5W2qc5VY/phone-1024-1536.png" alt="Phone UI" class="phone-mockup" />
     </section>
-    
-    <!-- Features Section -->
+
     <section class="features">
-        <div class="container">
-            <h2 class="section-title">What YORA Offers</h2>
-            
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-emoji">✈️</div>
-                    <h3 class="feature-title">Flight Buddy Finder</h3>
-                    <p>Find others who are flying on the same day as you.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-emoji">📆</div>
-                    <h3 class="feature-title">Countdown</h3>
-                    <p>Visualize your year abroad with our interactive timeline.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-emoji">🧠</div>
-                    <h3 class="feature-title">Mood Tracker</h3>
-                    <p>Track how you feel throughout your exchange experience.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-emoji">🗺️</div>
-                    <h3 class="feature-title">Community Map</h3>
-                    <p>See where other exchange students are located around the world.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-emoji">💬</div>
-                    <h3 class="feature-title">Shadow Box</h3>
-                    <p>Share your thoughts anonymously with the community.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-emoji">🤖</div>
-                    <h3 class="feature-title">YORA Buddy</h3>
-                    <p>An empathetic AI companion for your exchange journey.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-emoji">🧑‍🏫</div>
-                    <h3 class="feature-title">Mentors</h3>
-                    <p>Former exchange students ready to support you.</p>
-                </div>
-            </div>
-        </div>
+      <div class="card">
+        <img src="https://i.ibb.co/hxkLxHWN/map-1024-826.png" alt="Community Map Icon">
+        <h3>Community Map</h3>
+        <p>Discover and connect with other YORA users around you.</p>
+        <button>Explore Soon</button>
+      </div>
+      <div class="card">
+        <img src="https://i.ibb.co/Fbpgn2nF/ai-buddy-1024-692.png" alt="YORA Buddy Icon">
+        <h3>YORA Buddy (AI)</h3>
+        <p>Ask questions, vent feelings, or just talk – your digital buddy listens and supports you</p>
+        <button>Explore Soon</button>
+      </div>
+      <div class="card">
+        <img src="https://i.ibb.co/KjfmxMKY/shadow-box-chat-849-572.png" alt="Shadow Box Icon">
+        <h3>Shadow Box</h3>
+        <p>Share your honest thoughts anonymously with others</p>
+        <button>Explore Soon</button>
+      </div>
     </section>
-    
-    <!-- Why YORA Section -->
-    <section class="why-yora">
-        <div class="container">
-            <h2 class="section-title">Why YORA?</h2>
-            
-            <div class="why-content">
-                <p class="why-text">
-                    Exchange programs aren't just exciting. They also involve homesickness, language barriers, and isolation. YORA is there for you when you have no one – or when you need someone who understands.
-                </p>
-            </div>
-        </div>
+
+    <section class="beta-section">
+      <img src="https://i.ibb.co/LzsDzd4Y/joinbeta-1093-1093.png" alt="Join Beta Mascot" />
+      <div class="beta-text">
+        <h2>Join the Beta Waitlist!</h2>
+        <p>We’re building an app we wish we had during our own exchange.</p>
+        <a href="https://tally.so/r/mOVMYg" target="_blank">Sign up here</a>
+      </div>
     </section>
-    
-    <!-- CTA Section -->
-    <section class="cta">
-        <div class="container">
-            <h2>Ready to transform your exchange experience?</h2>
-            <a href="https://tally.so/r/mOVMYg" class="btn">Join the Beta Now</a>
-        </div>
-    </section>
-    
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-info">
-                    <p>Email: info@joinyora.com</p>
-                </div>
-                
-                <div class="footer-links">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Imprint</a>
-                </div>
-                
-                <div class="social-links">
-                    <a href="#" class="social-icon">TikTok</a>
-                    <a href="#" class="social-icon">Instagram</a>
-                </div>
-            </div>
-            
-            <div class="copyright">
-                © 2025 YORA
-            </div>
-        </div>
-    </footer>
+  </div>
+  <footer>
+    © 2025 YORA • Built with ❤️ by exchange students
+  </footer>
 </body>
 </html>
